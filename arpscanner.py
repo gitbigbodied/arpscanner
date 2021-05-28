@@ -9,7 +9,7 @@ def networkEnum():
     hname = socket.gethostname()
     hipaddy = socket.gethostbyname(hname)
     lastdot = hipaddy.rfind(".")
-    networkoctets = hipaddy[:11]
+    networkoctets = hipaddy[:10]
     return hname, hipaddy, networkoctets
 
 
@@ -18,6 +18,7 @@ def arpscan(netID):
     for o in range(255):
         try:
             targetIP = netID + str(o)
+            print(targetIP)
             arprequest = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=targetIP, hwdst="ff:ff:ff:ff:ff:ff")
             response = srp1(arprequest, timeout=1, verbose=0)
             if response:
